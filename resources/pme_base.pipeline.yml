@@ -1,0 +1,20 @@
+resources:
+  pipelines:
+    pme_base:
+      name: PME_base
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      root_path: ../src/pme_base
+      libraries:
+        - glob:
+            include: ../src/pme_base/transformations/**
+      serverless: true
+      continuous: false
+      photon: true
+      channel: current
+      configuration:
+        pme_base.path: ${var.pme_base_path}
+        # Ventana (utilities/ventana.py): periodo/mes = "ultimo" o fijo; meses_historial = "1" | N | "todos"
+        pme_base.periodo: ${var.pme_periodo}
+        pme_base.mes: ${var.pme_mes}
+        pme_base.meses_historial: ${var.pme_meses_historial}
